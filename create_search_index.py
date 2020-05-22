@@ -21,7 +21,7 @@ def walker(path):
 
 # Takes html page and outputs json object
 def parser(page):
-    soup = BeautifulSoup(open(page, 'r'))
+    soup = BeautifulSoup(open(page, 'r'), 'html.parser')
     node = {}
     try:
         node['title'] = soup.title.get_text(' ', strip=True).replace('&nbsp;', ' ').replace('^', '&#94;')
@@ -57,7 +57,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'''
     for n in nodes:
         xml = xml + url.format(n['url'])
     xml = xml + '\n</urlset>'
-    with open('public/search/sitemap.xml', 'w') as f:
+    with open('public/sitemap.xml', 'w') as f:
         f.write(xml)
 
 
